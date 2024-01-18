@@ -1,0 +1,59 @@
+_cl-install_module()
+{
+        local cur prev OPTS
+        COMPREPLY=()
+        cur="${COMP_WORDS[COMP_CWORD]}"
+        prev="${COMP_WORDS[COMP_CWORD-1]}"
+        case $prev in
+                '--iso')
+                        local IFS=$'\n'
+                        compopt -o filenames
+                        COMPREPLY=( $(compgen -f -- $cur) )
+                        return 0
+                        ;;
+                '-l'|'--locale')
+                        COMPREPLY=( $(compgen -W "be_BY bg_BG bs_BA cs_CZ da_DK de_DE el_GR en_AU en_GB en_US es_ES es_UY es_VE et_EE fr_BE fr_CA fr_FR hr_HR is_IS it_IT kk_KZ lt_LT lv_LV hu_HU nl_BE nl_NL nb_NO nn_NO pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sl_SI sq_AL sr_RS fi_FI sv_SE uk_UA" -- $cur) )
+                        return 0
+                        ;;
+                '-k'|'--keymap')
+                        COMPREPLY=( $(compgen -W "be_BY bg_BG bs_BA cs_CZ da_DK de_DE el_GR en_AU en_GB en_US es_ES es_UY es_VE et_EE fr_BE fr_CA fr_FR hr_HR is_IS it_IT kk_KZ lt_LT lv_LV hu_HU nl_BE nl_NL nb_NO nn_NO pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sl_SI sq_AL sr_RS fi_FI sv_SE uk_UA" -- $cur) )
+                        return 0
+                        ;;
+                '-s'|'--os')
+                        COMPREPLY=( $(compgen -W "CLD CLDM CLDX CLS CDS CSS CMC" -- $cur) )
+                        return 0
+                        ;;
+                '--hwclock')
+                        COMPREPLY=( $(compgen -W "local UTC" -- $cur) )
+                        return 0
+                        ;;
+        '--march')
+                        COMPREPLY=( $(compgen -W "auto x86_64" -- $cur) )
+                        return 0
+                        ;;
+        '--U'|'--update')
+                        COMPREPLY=( $(compgen -W "on off" -- $cur) )
+                        return 0
+                        ;;
+        '--C'|'--crypt-home')
+                        COMPREPLY=( $(compgen -W "on off" -- $cur) )
+                        return 0
+                        ;;
+                '-h'|'--help'|'-V'|'--version')
+                        return 0
+                        ;;
+        esac
+        OPTS="--locale
+          --keymap
+          --os
+          --hwclock
+          --iso
+          --help
+          --march
+          --crypt-home
+          --update
+                  --version"
+        COMPREPLY=( $(compgen -W "${OPTS[*]}" -- $cur) )
+        return 0
+}
+complete -F _cl-install_module cl-install
