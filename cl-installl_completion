@@ -27,15 +27,15 @@ _cl-install_module()
                         COMPREPLY=( $(compgen -W "local UTC" -- $cur) )
                         return 0
                         ;;
-        '--march')
+                '--march')
                         COMPREPLY=( $(compgen -W "auto x86_64" -- $cur) )
                         return 0
                         ;;
-        '--U'|'--update')
+                '-U'|'--update')
                         COMPREPLY=( $(compgen -W "on off" -- $cur) )
                         return 0
                         ;;
-        '--C'|'--crypt-home')
+                '-C'|'--crypt-home')
                         COMPREPLY=( $(compgen -W "on off" -- $cur) )
                         return 0
                         ;;
