@@ -27,33 +27,186 @@ _cl-install_module()
                         COMPREPLY=( $(compgen -W "local UTC" -- $cur) )
                         return 0
                         ;;
-                '--march')
+        '--march')
                         COMPREPLY=( $(compgen -W "auto x86_64" -- $cur) )
                         return 0
                         ;;
-                '-U'|'--update')
+        '--U'|'--update')
                         COMPREPLY=( $(compgen -W "on off" -- $cur) )
+                        return 0
+                        ;;
+        '-S'|'--auto-scheme')
+                        COMPREPLY=( $(compgen -W "swap update data uefi lvm" -- $cur) )
                         return 0
                         ;;
                 '-C'|'--crypt-home')
                         COMPREPLY=( $(compgen -W "on off" -- $cur) )
                         return 0
                         ;;
-                '-h'|'--help'|'-V'|'--version')
+                '--root-fs')
+                        COMPREPLY=( $(compgen -W "f2fs btrfs ntfs-3g ntfs xfs btrfs-compress jfs" -- $cur) )
+                        return 0
+                        ;;
+                '--data-fs')
+                        COMPREPLY=( $(compgen -W "f2fs btrfs ntfs-3g ntfs xfs btrfs-compress jfs" -- $cur) )
+                        return 0
+                        ;;
+                '--T'|'--partition-table')
+                        COMPREPLY=( $(compgen -W "dos gpt" -- $cur) )
+                        return 0
+                        ;;
+                '--root-size')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+                '--swap-size')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '-D'|'--disk')
+                        COMPREPLY=( $(compgen  -- $cur) )
+                        return 0
+                        ;;
+        '--uuid')
+                        COMPREPLY=( $(compgen -W "on off" -- $cur) )
+                        return 0
+                        ;;
+        '--mbr')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '--uefi')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '--netconf')
+                        COMPREPLY=( $(compgen -W "NetworkManager openrc" -- $cur) )
+                        return 0
+                        ;;
+        '--iface')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+         '--hostname')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+         '--ntp')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+         '--dns')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '--domain-search')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '--route')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '--root-password')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '--grub-password')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '--u'|'--user')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '-A'|'--autologin')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '--audio')
+                        COMPREPLY=( $(compgen -W "pipewire alsa" -- $cur) )
+                        return 0
+                        ;;
+        '--video')
+                        COMPREPLY=( $(compgen -W "nvidia radeon amdgpu framebuffer auto" -- $cur) )
+                        return 0
+                        ;;
+        '--composite')
+                        COMPREPLY=( $(compgen -W "on off" -- $cur) )
+                        return 0
+                        ;;
+        '--grub-terminal')
+                        COMPREPLY=( $(compgen -W "gfxterm console" -- $cur) )
+                        return 0
+                        ;;
+        '--fb')
+                        COMPREPLY=( $(compgen -- $cur) )
+                        return 0
+                        ;;
+        '-a'|'--autockeck')
+                        COMPREPLY=( $(compgen -W "on off" -- $cur) )
+                        return 0
+                        ;;
+        '-I'|'--autockeck-interval')
+                        COMPREPLY=( $(compgen -W "6h 12h 1d" -- $cur) )
+                        return 0
+                        ;;
+        '--clean-pkg')
+                        COMPREPLY=( $(compgen -W "on off" -- $cur) )
+                        return 0
+                        ;;
+        '-o'|'--update-other')
+                        COMPREPLY=( $(compgen -W "on off auto" -- $cur) )
+                        return 0
+                        ;;
+         '-K'|'--update-pkg')
+                        COMPREPLY=( $(compgen -W "on off" -- $cur) )
+                        return 0
+                        ;;           
+                '-h'|'--help'|'--force'|'-f')
                         return 0
                         ;;
         esac
-        OPTS="--locale
-          --keymap
-          --os
-          --hwclock
-          --iso
-          --help
-          --march
-          --crypt-home
-          --update
-                  --version"
+        OPTS="--audio
+        --autockeck
+        --autockeck-interval
+        --autologin
+        --auto-scheme
+        --composite
+        --crypt-home
+        --data-fs
+        --disk
+        --dns
+        --domain-search
+        --fb
+        --force
+        --grub-password
+        --grub-terminal
+        --help
+        --hostname
+        --hwclock
+        --iface
+        --iso
+        --locale
+        --march
+        --mbr
+        --netconf
+        --ntp
+        --os
+        --partition-table
+        --root-fs
+        --root-password
+        --root-size
+        --route
+        --swap-size
+        --uefi
+        --update
+        --update-other
+        --update-pkg
+        --user
+        --uuid
+        -video"
+
         COMPREPLY=( $(compgen -W "${OPTS[*]}" -- $cur) )
         return 0
 }
-complete -F _cl-install_module cl-install
